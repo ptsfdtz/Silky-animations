@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Context,
   createContext,
   useContext,
   useEffect,
@@ -22,43 +21,26 @@ const ThemeContext = createContext<{
 } | null>(null);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(ThemeOptions.light);
+  const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme && Object.values(ThemeOptions).includes(savedTheme)) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle(
-        "dark",
-        savedTheme === ThemeOptions.dark
-      );
-    }
+    if (savedTheme) applyTheme(savedTheme);
   }, []);
-
-  const switchTheme = () => {
-    const newTheme =
-      theme === ThemeOptions.light ? ThemeOptions.dark : ThemeOptions.light;
-
-    if (!document.startViewTransition) {
-      applyTheme(newTheme);
-      return;
-    }
-
-    document.startViewTransition(() => applyTheme(newTheme));
-  };
 
   const applyTheme = (newTheme: Theme) => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+    document.documentElement.classList.toggle("light", newTheme === "light");
+  };
 
-    document.documentElement.classList.toggle(
-      "dark",
-      newTheme === ThemeOptions.dark
-    );
-    document.documentElement.classList.toggle(
-      "light",
-      newTheme === ThemeOptions.light
-    );
+  const switchTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+
+    document.startViewTransition
+      ? document.startViewTransition(() => applyTheme(newTheme))
+      : applyTheme(newTheme);
   };
 
   return (
@@ -69,9 +51,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 };
 
 export const useThemeContext = () =>
-  useContext(
-    ThemeContext as Context<{
-      theme: keyof typeof ThemeOptions;
-      switchTheme: () => void;
-    }>
-  );
+  useContext(ThemeContext) as {
+    theme: Theme;
+    switchTheme: () => void;
+  };

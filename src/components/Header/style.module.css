@@ -1,7 +1,7 @@
 .container {
   padding: 10px 20px;
   background-color: var(--global-header-background);
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.06);
 }
 
 .list {

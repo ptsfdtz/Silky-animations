@@ -2,8 +2,8 @@ import style from "./style.module.css";
 
 export const Footer = () => {
   return (
-    <footer className={style.footer}>
-      <div className={style.content}>footer content</div>
-    </footer>
+    <div className={style.footer}>
+      <p>© {`${new Date().getFullYear()}`} PTSFDTZ</p>
+    </div>
   );
 };
