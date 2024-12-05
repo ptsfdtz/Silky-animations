@@ -1,14 +1,21 @@
 import "./globals.css";
 import { Footer, Header } from "@/components/index";
-export default function Layout() {
+import { ThemeProvider } from "@/app/AppContext";
+
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ch-CN">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My App</title>
+      </head>
       <body>
-        <Header />
-        <main>
-          <h1>Welcome to our website</h1>
-        </main>
-        <Footer />
+        <ThemeProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

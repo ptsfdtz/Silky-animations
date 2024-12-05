@@ -1,11 +1,22 @@
 :root {
-  --max-width: 1100px;
-  --border-radius: 12px;
+  --global-max-width: 1120px;
+  --global-background: #fbfbfb;
+  --global-header-background: #ffffff;
+  --global-text-color: #3c4248;
+  --global-secondary-text-color: #72767a;
+  --global-secondary-backgroud: #f1f2f3;
+  --global-button-backgroud: #e5e5e5;
+  --global-line-color: #dbdbdb;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-  }
+html.dark {
+  --global-background: #171717;
+  --global-header-background: #202020;
+  --global-text-color: #e9ecf0;
+  --global-secondary-text-color: #72767a;
+  --global-secondary-backgroud: #2b2b2b;
+  --global-button-backgroud: #222222;
+  --global-line-color: #2b2b2b;
 }
 
 * {
@@ -21,6 +32,12 @@ body {
 }
 
 body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden auto;
+
+  background-color: var(--global-background);
+  color: var(--global-text-color);
 }
 
 a {

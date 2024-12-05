@@ -1,7 +1,9 @@
+import style from "./style.module.css";
+
 export const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="container">footer content</div>
+    <footer className={style.footer}>
+      <div className={style.content}>footer content</div>
     </footer>
   );
 };
